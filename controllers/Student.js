@@ -1,12 +1,17 @@
 var Student = require('../models/Student');
 // List of all Students
-exports.student_list = function(req, res) {
-res.send('NOT IMPLEMENTED: Student list');
-};
-// for a specific Student.
-exports.student_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Student detail: ' + req.params.id);
-};
+exports.student_list = async function(req, res) {
+    try{
+    theStudents = await Student.find();
+    res.send(theStudents);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
+
+
 // Handle Student create on POST.
 exports.student_create_post = async function(req, res) {
     console.log(req.body)
@@ -31,9 +36,27 @@ exports.student_create_post = async function(req, res) {
 exports.student_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Student delete DELETE ' + req.params.id);
 };
+
 // Handle Student update form on PUT.
-exports.student_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: Student update PUT' + req.params.id);
+exports.student_update_put = async function(req, res) {
+console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
+try {
+let toUpdate = await Student.findById(req.params.id)
+// Do updates of properties
+if(req.body.student_name)
+toUpdate.student_name = req.body.student_name;
+if(req.body.student_gender) 
+toUpdate.student_gender = req.body.student_gender;
+if(req.body.student_id) 
+toUpdate.student_id = req.body.student_id;
+let result = await toUpdate.save();
+console.log("Sucess " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+}
 };
 
 
@@ -49,5 +72,17 @@ exports.student_view_all_Page = async function(req, res) {
     catch(err){
     res.status(500);
     res.send(`{"error": ${err}}`);
+    }
+    };
+
+    // for a specific Student.
+exports.student_detail = async function(req, res) {
+    console.log("detail" + req.params.id);
+    try {
+    result = await Student.findById(req.params.id);
+    res.send(result);
+    } catch (error) {
+    res.status(500);
+    res.send(`{"error": document for id ${req.params.id} not found`);
     }
     };
