@@ -8,10 +8,26 @@ exports.student_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: Student detail: ' + req.params.id);
 };
 // Handle Student create on POST.
-exports.student_create_post = function(req, res) {
-res.send('NOT IMPLEMENTED: Student create POST');
-};
-// Handle Costume delete form on DELETE.
+exports.student_create_post = async function(req, res) {
+    console.log(req.body)
+    let document = new Student();
+    // We are looking for a body, since POST does not have query parameters.
+    // Even though bodies can be in many different formats, we will be picky
+    // and require that it be a json object
+    // {"costume_type":"goat", "cost":12, "size":"large"}
+    document.student_name = req.body.student_name;
+    document.student_gender = req.body.student_gender;
+    document.student_id = req.body.student_id;
+    try{
+    let result = await document.save();
+    res.send(result);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
+// Handle Student delete form on DELETE.
 exports.student_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Student delete DELETE ' + req.params.id);
 };
@@ -21,11 +37,14 @@ res.send('NOT IMPLEMENTED: Student update PUT' + req.params.id);
 };
 
 
-// List of all Students
-exports.student_list = async function(req, res) {
+
+
+// VIEWS
+// Handle a show all view
+exports.student_view_all_Page = async function(req, res) {
     try{
     theStudents = await Student.find();
-    res.send(theStudents);
+    res.render('students', { title: 'Student Search Results', results: theStudents });
     }
     catch(err){
     res.status(500);
