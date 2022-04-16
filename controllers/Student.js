@@ -32,10 +32,20 @@ exports.student_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
-// Handle Student delete form on DELETE.
-exports.student_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: Student delete DELETE ' + req.params.id);
-};
+
+
+// Handle Student delete on DELETE.
+exports.student_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Student.findByIdAndDelete(req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
 
 // Handle Student update form on PUT.
 exports.student_update_put = async function(req, res) {
