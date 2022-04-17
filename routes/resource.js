@@ -18,4 +18,8 @@ student_controller.student_update_put);
 router.get('/resource/students/:id', student_controller.student_detail);
 // GET request for list of all Student items.
 router.get('/resource/students', student_controller.student_list);
+/* GET detail Student page */
+router.get('/detail', student_controller.student_view_one_Page);
+/* GET create Student page */
+router.get('/create', student_controller.student_create_Page);
 module.exports = router;

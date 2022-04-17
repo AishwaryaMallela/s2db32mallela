@@ -1,0 +1,33 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  form(id='StudentForm', action="/resource/students", method="POST") 
+    div.form-group 
+        label.studentAttr(for='student_name') Student Name 
+        input#student_name(type='text', name='student_name') 
+    div.form-group 
+        label.studentAttr(for='student_gender') Student Gender
+        input#student_gender(type='text', name='student_gender') 
+    div.form-group 
+        label.studentAttr(for='student_id') student Number 
+        input#student_id(type='number', name='student_id') 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['StudentForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) 
+      }).then((resp) => { 
+        return resp.text();  
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    });
