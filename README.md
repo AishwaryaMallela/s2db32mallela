@@ -1,6 +1,6 @@
-# s2wb32mallela<br>
+# s2db32mallela<br>
 A new Repo for pug<br>
-My Heroku server link<https://s2wb32mallela.herokuapp.com/>
+My Heroku server link<https://s2db32mallela.herokuapp.com/>
 
 Class - Student class Student{ Constructor(student_name,student_gender,student_id){
     this.student_name = student_name;
