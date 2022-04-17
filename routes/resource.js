@@ -22,4 +22,8 @@ router.get('/resource/students', student_controller.student_list);
 router.get('/detail', student_controller.student_view_one_Page);
 /* GET create Student page */
 router.get('/create', student_controller.student_create_Page);
+/* GET create update page */
+router.get('/update', student_controller.student_update_Page);
+/* GET delete Student page */
+router.get('/delete', student_controller.student_delete_Page);
 module.exports = router;

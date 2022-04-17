@@ -2,8 +2,16 @@ extends layout
  
 block content 
   h1= title 
- 
-  form(id='StudentForm', action="/resource/resource/students", method="POST") 
+  - let studentid = toShow._id
+  - let student_name = toShow.student_name
+  - let student_gender = toShow.student_gender
+  - let student_id = toShow.student_id
+
+  div.row(class='mb-2')
+   div.mr-1 ID is
+   div #{studentid}
+  - let actionid = "/resource/resource/students/" + studentid 
+  form(id='StudentForm', action=actionid, method="PUT") 
     div.form-group 
         label.studentAttr(for='student_name') Student Name 
         input#student_name(type='text', name='student_name') 
@@ -19,15 +27,15 @@ block content
     document.forms['StudentForm'].addEventListener('submit', (event) => { 
       event.preventDefault(); 
       fetch(event.target.action, { 
-        method: 'POST', 
+        method: 'PUT', 
         body: new URLSearchParams(new FormData(event.target)) 
       }).then((resp) => { 
         return resp.json();  
       }).then((body) => { 
-        alert("Save succeded") 
+        alert("Update succeded") 
         // TODO handle body 
       }).catch((error) => { 
         // TODO handle error 
-        alert("Save failed " + error ) 
+        alert("Update failed " + error ) 
       }); 
     });
