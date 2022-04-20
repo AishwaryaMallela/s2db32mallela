@@ -4,9 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const connectionString =
-process.env.MONGO_CON
+
+const connectionString = process.env.MONGO_CON || 'mongodb+srv://dbaish:dbaishmongo@cluster0.2ff6m.mongodb.net/learnmongo?retryWrites=true&w=majority'
 mongoose = require('mongoose');
+console.log(connectionString)
 mongoose.connect(connectionString,
 {useNewUrlParser: true,
 useUnifiedTopology: true});

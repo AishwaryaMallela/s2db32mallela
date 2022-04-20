@@ -2,6 +2,10 @@ extends layout
  
 block content 
   h1= title 
+
+  if(toShow == null)
+    h2 No instance to update
+  else 
   - let studentid = toShow._id
   - let student_name = toShow.student_name
   - let student_gender = toShow.student_gender

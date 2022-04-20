@@ -8,6 +8,8 @@ a {
 }
 
 .studentAttr {
-  background-color: aquamarine;
+  background-color: rgb(248, 140, 140);
   width: 120px;
+  color:blue;
+  font-family: Arial, Helvetica, Sans-serif;
  }
