@@ -81,20 +81,20 @@ async function recreateDB(){
   // Delete everything
   await student.deleteMany();
   
-  let instance1 = new student({student_name:"Gauthi", student_gender:'Male', student_id:"6378256"});
+  let instance1 = new student({student_name:"Gauthi", student_gender:'Male', student_id:100});
   instance1.save( function(err,doc) {
   if(err) return console.error(err);
   console.log("First object saved")
   });
   
-  let instance2 = new student({student_name:"Srinu", student_gender:'Male', student_id:"1234098"});
+  let instance2 = new student({student_name:"Srinu", student_gender:'Male', student_id:150});
     instance2.save( function(err,doc) {
     if(err) return console.error(err);
     console.log("Second object saved")
     });
   
   
-  let instance3 = new student({student_name:"Sandi", student_gender:'Female', student_id:"5678456"});
+  let instance3 = new student({student_name:"Sandi", student_gender:'Female', student_id:230});
     instance3.save( function(err,doc) {
     if(err) return console.error(err);
     console.log("Third object saved")
