@@ -10,7 +10,7 @@ block content
     - let student_name = toShow.student_name 
     - let student_gender = toShow.student_gender 
     - let student_id = toShow.student_id 
-    - let actionid = "/resource/resource/students/" + studentid 
+    - let actionid = "/resource/student/" + studentid 
     script let actionid = "#{actionid}" 
     div 
       div.row 
@@ -31,8 +31,8 @@ block content
  
   script. 
     function cancel() { 
-      // Go back to the home page for the costume collection 
-      window.location.href='/resource/resource/students' 
+      // Go back to the home page for the student collection 
+      window.location.href='/resource/student' 
     } 
   script. 
     function deleteOnid() { 
@@ -44,7 +44,7 @@ block content
         return resp.json(); // or resp.text() or whatever the server sends 
       }).then((body) => { 
         alert("Delete succeded") 
-        window.location.href='/resource/resource/students' 
+        window.location.href='/resource/student' 
         // TODO handle body 
       }).catch((error) => { 
         // TODO handle error 

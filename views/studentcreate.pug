@@ -3,7 +3,7 @@ extends layout
 block content 
   h1= title 
  
-  form(id='StudentForm', action="/resource/resource/students", method="POST") 
+  form(id='StudentForm', action="/resource/student", method="POST") 
     div.form-group 
         label.studentAttr(for='student_name') Student Name 
         input#student_name(type='text', name='student_name') 

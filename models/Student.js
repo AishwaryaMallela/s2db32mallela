@@ -4,4 +4,4 @@ student_name: String,
 student_gender: String,
 student_id: String
 })
-module.exports = mongoose.model("Student", StudentSchema)
+module.exports = mongoose.model("student", StudentSchema)

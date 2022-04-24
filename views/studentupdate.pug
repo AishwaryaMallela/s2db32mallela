@@ -14,7 +14,7 @@ block content
   div.row(class='mb-2')
    div.mr-1 ID is
    div #{studentid}
-  - let actionid = "/resource/resource/students/" + studentid 
+  - let actionid = "/resource/student/" + studentid 
   form(id='StudentForm', action=actionid, method="PUT") 
     div.form-group 
         label.studentAttr(for='student_name') Student Name 

@@ -1,8 +1,8 @@
-var Student = require('../models/Student');
+var student = require('../models/student');
 // List of all Students
 exports.student_list = async function(req, res) {
     try{
-    theStudents = await Student.find();
+    theStudents = await student.find();
     res.send(theStudents);
     }
     catch(err){
@@ -11,11 +11,22 @@ exports.student_list = async function(req, res) {
     }
     };
 
+// for a specific Student.
+exports.student_detail = async function(req, res) {
+    console.log("detail" + req.params.id);
+    try {
+    result = await student.findById(req.params.id);
+    res.send(result);
+    } catch (error) {
+    res.status(500);
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+    };
 
 // Handle Student create on POST.
 exports.student_create_post = async function(req, res) {
     console.log(req.body)
-    let document = new Student();
+    let document = new student();
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
@@ -38,7 +49,7 @@ exports.student_create_post = async function(req, res) {
 exports.student_delete = async function(req, res) {
     console.log("delete " + req.params.id)
     try {
-    result = await Student.findByIdAndDelete(req.params.id)
+    result = await student.findByIdAndDelete(req.params.id)
     console.log("Removed " + result)
     res.send(result)
     } catch (err) {
@@ -51,7 +62,7 @@ exports.student_delete = async function(req, res) {
 exports.student_update_put = async function(req, res) {
 console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
 try {
-let toUpdate = await Student.findById(req.params.id)
+let toUpdate = await student.findById(req.params.id)
 // Do updates of properties
 if(req.body.student_name)
 toUpdate.student_name = req.body.student_name;
@@ -76,8 +87,8 @@ failed`);
 // Handle a show all view
 exports.student_view_all_Page = async function(req, res) {
     try{
-    theStudents = await Student.find();
-    res.render('students', { title: 'Student Search Results', results: theStudents });
+    theStudents = await student.find();
+    res.render('student', { title: 'Student Search Results', results: theStudents });
     }
     catch(err){
     res.status(500);
@@ -85,24 +96,14 @@ exports.student_view_all_Page = async function(req, res) {
     }
     };
 
-    // for a specific Student.
-exports.student_detail = async function(req, res) {
-    console.log("detail" + req.params.id);
-    try {
-    result = await Student.findById(req.params.id);
-    res.send(result);
-    } catch (error) {
-    res.status(500);
-    res.send(`{"error": document for id ${req.params.id} not found`);
-    }
-    };
+  
 
 
 // Handle a show one view with id specified by query
 exports.student_view_one_Page = async function(req, res) {
     console.log("single view for id " + req.query.id)
     try{
-    result = await Student.findById( req.query.id)
+    result = await student.findById( req.query.id)
     res.render('studentdetail',
    { title: 'Student Detail', toShow: result });
     }
@@ -131,7 +132,7 @@ exports.student_create_Page = function(req, res) {
 exports.student_update_Page = async function(req, res) {
     console.log("update view for item "+req.query.id)
     try{
-    let result = await Student.findById(req.query.id)
+    let result = await student.findById(req.query.id)
     res.render('studentupdate', { title: 'Student Update', toShow: result });
     }
     catch(err){
@@ -144,7 +145,7 @@ exports.student_update_Page = async function(req, res) {
 exports.student_delete_Page = async function(req, res) {
     console.log("Delete view for id " + req.query.id)
     try{
-    result = await Student.findById(req.query.id)
+    result = await student.findById(req.query.id)
     res.render('studentdelete', { title: 'Student Delete', toShow:
     result });
     }

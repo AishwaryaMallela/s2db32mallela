@@ -2,11 +2,11 @@ extends layout
 
 block content
   h1= title
-  - let results=[{student_name:"Aishwarya",student_gender:"Female",student_id:"91912"} , {student_name:"Suneetha",student_gender:"Female",student_id:"91945"} , {student_name:"Gautam",student_gender:"Male",student_id:"91987"}];
+  - let items = results
   div(class="container-fluid")
     div(class="row m-1")
-     each item in results
-      - let destination = `dispatch(\"/students/update?id=${item._id}\")`
+     each item in items
+      - let destination = `dispatch(\"/student/update?id=${item._id}\")`
       div(class="row-sm-2", class="m-1") Item #{item.student_name}(#{item.student_gender}) is #{item.student_id}
        button.btn( class="btn-primary ml-1", onclick= destination) Update
 
