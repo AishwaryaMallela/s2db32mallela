@@ -19,7 +19,7 @@ passport.use(new LocalStrategy(
   });
   }))
 
-const connectionString = process.env.MONGO_CON || 'mongodb+srv://dbaish:dbaishmongo@cluster0.2ff6m.mongodb.net/learnmongo?retryWrites=true&w=majority'
+const connectionString = 'mongodb+srv://dbaish:dbaishmongo@cluster0.2ff6m.mongodb.net/learnmongo?retryWrites=true&w=majority'
 mongoose = require('mongoose');
 console.log(connectionString)
 mongoose.connect(connectionString,
